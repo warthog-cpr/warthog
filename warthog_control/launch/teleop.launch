@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="joy_teleop" default="true" />
+
+  <group ns="rc_teleop" if="$(optenv WARTHOG_JOY_TELEOP 0)">
+    <rosparam command="load" file="$(find warthog_control)/config/teleop.yaml" />
+    <node pkg="joy" type="joy_node" name="joy_node">
+      <param name="dev" value="$(arg joy_dev)" />
+    </node>
+
+    <node pkg="teleop_twist_joy" type="teleop_node" name="teleop_twist_joy" />
+  </group>
+
+  <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server">
+    <param name="marker_size_scale" value="2" />
+  </node>
+
+  <node pkg="twist_mux" type="twist_mux" name="twist_mux">
+   <rosparam command="load" file="$(find warthog_control)/config/twist_mux.yaml" />
+   <remap from="cmd_vel_out" to="warthog_velocity_controller/cmd_vel"/>
+  </node>
+
+</launch>

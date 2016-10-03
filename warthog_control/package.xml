@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>warthog_control</name>
+  <version>0.0.0</version>
+  <description>Controllers for Warthog</description>
+  <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://www.clearpathrobotics.com/</url>
+  <author email="rgariepy@clearpathrobotics.com">Ryan Gariepy</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>controller_manager</run_depend>
+  <run_depend>interactive_marker_twist_server</run_depend>
+  <run_depend>diff_drive_controller</run_depend>
+  <run_depend>joint_state_controller</run_depend>
+  <run_depend>joy</run_depend>
+  <run_depend>robot_localization</run_depend>
+  <run_depend>teleop_twist_joy</run_depend>
+  <run_depend>topic_tools</run_depend>
+  <run_depend>rosserial_server</run_depend>
+  <run_depend>twist_mux</run_depend>
+
+
+  <export>
+  </export>
+</package>

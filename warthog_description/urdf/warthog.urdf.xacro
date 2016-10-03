@@ -1,0 +1,178 @@
+<?xml version='1.0'?>
+
+<robot name="warthog" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find warthog_description)/urdf/warthog_params.xacro" />
+
+  <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
+  <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
+  <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
+  <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+
+  <xacro:macro name="wheel" params="prefix side fwd left">
+    <link name="${prefix}_wheel">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="${wheel_mass}" />
+        <xacro:wheel_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/wheel.stl" />
+        </geometry>
+        <material name="dark_grey" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_wheel_jnt" type="continuous">
+      <xacro:if value="${left}">
+        <parent link="left_diff_unit_link"/>
+      </xacro:if>
+      <xacro:unless value="${left}">
+        <parent link="right_diff_unit_link"/>
+      </xacro:unless>
+      <child link="${prefix}_wheel"/>
+      <origin xyz="${axle_x_offset*fwd} ${axle_y_offset*side} ${axle_z_offset}" rpy="0 0 0" />
+      <axis xyz="0 1 0"/>
+    </joint>
+    <gazebo reference="${prefix}_wheel">
+      <selfCollide>false</selfCollide>
+      <mu1>0.9</mu1>
+      <mu2>0.5</mu2>
+      <kp value="10000000.0" />
+      <kd value="10.0" />
+      <fdir1 value="1 0 0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+    <transmission name="${prefix}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_wheel_jnt">
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_actuator">
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:wheel prefix="fl" side="1" fwd="1" left="true"/>
+  <xacro:wheel prefix="fr" side="-1" fwd="1" left="false"/>
+  <xacro:wheel prefix="bl" side="1" fwd="-1" left="true"/>
+  <xacro:wheel prefix="br" side="-1" fwd="-1" left="false"/>
+
+  <xacro:macro name="diff_unit" params="prefix side left">
+    <link name="${prefix}_diff_unit_link">
+      <inertial>
+        <origin xyz="0 ${side*-1*0.05} 0.197" rpy="0 0 0"/>
+        <mass value="${diff_unit_mass}"/>
+        <xacro:box_inertia m="${diff_unit_mass}" x="${diff_unit_length}"
+                           y="${diff_unit_width}" z="${diff_unit_height}" />
+      </inertial>
+      <visual>
+        <origin xyz="0 ${side*-1*0.05} 0.197" rpy="${PI/2} 0 ${PI/2-side*PI/2}"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/rocker.stl" />
+        </geometry>
+        <material name="yellow" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.197" rpy="0 0 0"/>
+        <geometry>
+          <box size="${diff_unit_length} ${diff_unit_width} ${diff_unit_height}"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_diff_unit_jnt" type="revolute">
+      <limit upper="0.15" lower="-0.15" effort="100000" velocity="1"/>
+      <parent link="base_link"/>
+      <child link="${prefix}_diff_unit_link"/>
+      <origin xyz="${diff_unit_offset_x} ${diff_unit_offset_y*side} ${diff_unit_offset_z}" rpy="0 0 0" />
+      <axis xyz="0 1 0"/>
+      <dynamics damping="100" friction="0.5"/>
+    </joint>
+    <gazebo reference="${prefix}_diff_unit_link">
+      <selfCollide>false</selfCollide>
+      <material>Gazebo/Orange</material>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:diff_unit prefix="left" side="1" left="true"/>
+  <xacro:diff_unit prefix="right" side="-1" left="false"/>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${chassis_mass}"/>
+      <xacro:box_inertia m="${chassis_mass}" x="${chassis_length}"
+                         y="${chassis_width}" z="${chassis_height}" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warthog_description/meshes/chassis.stl" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="base_link">
+    <selfCollide>false</selfCollide>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <!-- This link is purely to complete the visual look -->
+  <link name="diff_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+      <geometry>
+        <mesh filename="package://warthog_description/meshes/diff-link.stl" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+    <visual>
+      <origin xyz="0.285 0.3845 0.008" rpy="0 ${PI/2} 0"/>
+      <geometry>
+        <mesh filename="package://warthog_description/meshes/susp-link.stl" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+    <visual>
+      <origin xyz="0.285 0.3845 0.008" rpy="0 ${PI/2} 0"/>
+      <geometry>
+        <mesh filename="package://warthog_description/meshes/susp-link.stl" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+  </link>
+  <joint name="$diff_link_jnt" type="fixed">
+    <parent link="base_link"/>
+    <child link="diff_link"/>
+    <origin xyz="-0.65 0 0.07" rpy="0 0 0" />
+  </joint>
+
+  <gazebo reference="diff_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <!-- Bring in simulation data for Gazebo. -->
+  <xacro:include filename="$(find warthog_description)/urdf/warthog.gazebo" />
+
+  <!-- Optional standard accessories, including their simulation data. The rendering
+       of these into the final description is controlled by optenv variables, which
+       default each one to off.-->
+  <xacro:include filename="$(find warthog_description)/urdf/accessories.urdf.xacro" />
+
+  <!-- Optional custom includes. -->
+  <xacro:include filename="$(find warthog_description)/urdf/$(optenv WARTHOG_URDF_EXTRAS empty.urdf)" />
+</robot>

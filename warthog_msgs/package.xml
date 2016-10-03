@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>warthog_msgs</name>
+  <version>0.0.0</version>
+  <description>Messages exclusive to Warthog, especially for representing low-level motor commands and sensors.</description>
+  <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://wiki.ros.org/warthog_msgs</url>
+  <author email="rgariepy@clearpathrobotics.com">Ryan Gariepy</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>std_msgs</run_depend>
+
+  <export>
+  </export>
+</package>

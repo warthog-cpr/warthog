@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+
+<robot name="warthog" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <xacro:property name="wheel_radius" value="0.3" />
+  <xacro:property name="wheel_width" value="0.25" />
+  <xacro:property name="wheel_mass" value="15" />
+
+  <xacro:property name="axle_x_offset" value="0.46" />
+  <xacro:property name="axle_y_offset" value="0.01" />
+  <xacro:property name="axle_z_offset" value="-0.005" />
+
+  <xacro:property name="diff_unit_length" value="1.34" />
+  <xacro:property name="diff_unit_width" value="0.28" />
+  <xacro:property name="diff_unit_height" value="0.63"/>
+  <xacro:property name="diff_unit_mass" value="50" />
+
+  <xacro:property name="diff_unit_offset_x" value="0.04" />
+  <xacro:property name="diff_unit_offset_y" value="0.55" />
+  <xacro:property name="diff_unit_offset_z" value="-0.105" />
+
+  <xacro:property name="chassis_length" value="1.35" />
+  <xacro:property name="chassis_width" value="0.70" />
+  <xacro:property name="chassis_height" value="0.30" />
+  <xacro:property name="chassis_mass" value="100" />
+
+  <xacro:property name="dummy_inertia" value="1e-09"/>
+
+  <xacro:macro name="wheel_inertia" params="m r h">
+    <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0"
+             iyy="${m*r*r/2}" iyz="0"
+             izz="${m*(3*r*r+h*h)/12}" />
+  </xacro:macro>
+
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertia ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+             iyy="${m*(x*x+z*z)/12}" iyz="0"
+             izz="${m*(x*x+z*z)/12}" />
+  </xacro:macro>
+</robot>
