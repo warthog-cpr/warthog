@@ -148,7 +148,7 @@
       <material name="light_grey" />
     </visual>
     <visual>
-      <origin xyz="0.285 0.3845 0.008" rpy="0 ${PI/2} 0"/>
+      <origin xyz="0.285 -0.3845 0.008" rpy="0 ${PI/2} 0"/>
       <geometry>
         <mesh filename="package://warthog_description/meshes/susp-link.stl" />
       </geometry>
