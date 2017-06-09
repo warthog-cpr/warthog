@@ -90,7 +90,7 @@
     </link>
     <joint name="${prefix}_diff_unit_jnt" type="revolute">
       <limit upper="0.15" lower="-0.15" effort="100000" velocity="1"/>
-      <parent link="base_link"/>
+      <parent link="chassis_link"/>
       <child link="${prefix}_diff_unit_link"/>
       <origin xyz="${diff_unit_offset_x} ${diff_unit_offset_y*side} ${diff_unit_offset_z}" rpy="0 0 0" />
       <axis xyz="0 1 0"/>
@@ -98,14 +98,22 @@
     </joint>
     <gazebo reference="${prefix}_diff_unit_link">
       <selfCollide>false</selfCollide>
-      <material>Gazebo/Orange</material>
+      <material>Gazebo/Yellow</material>
     </gazebo>
   </xacro:macro>
 
   <xacro:diff_unit prefix="left" side="1" left="true"/>
   <xacro:diff_unit prefix="right" side="-1" left="false"/>
 
-  <link name="base_link">
+  <link name="base_link"></link>
+
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="chassis_link" />
+  </joint>
+
+  <link name="chassis_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="${chassis_mass}"/>
@@ -126,9 +134,9 @@
       </geometry>
     </collision>
   </link>
-  <gazebo reference="base_link">
+  <gazebo reference="chassis_link">
     <selfCollide>false</selfCollide>
-    <material>Gazebo/Orange</material>
+    <material>Gazebo/Black</material>
   </gazebo>
 
   <!-- This link is purely to complete the visual look -->
@@ -156,7 +164,7 @@
     </visual>
   </link>
   <joint name="$diff_link_jnt" type="fixed">
-    <parent link="base_link"/>
+    <parent link="chassis_link"/>
     <child link="diff_link"/>
     <origin xyz="-0.65 0 0.07" rpy="0 0 0" />
   </joint>

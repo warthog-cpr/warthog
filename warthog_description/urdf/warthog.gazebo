@@ -17,7 +17,7 @@
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
       <robotNamespace>/</robotNamespace>
       <updateRate>50.0</updateRate>
-      <bodyName>imu_link</bodyName>
+      <bodyName>base_link</bodyName>
       <topicName>imu/data</topicName>
       <accelDrift>0.005 0.005 0.005</accelDrift>
       <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
@@ -32,7 +32,7 @@
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
       <updateRate>40</updateRate>
       <robotNamespace>/</robotNamespace>
-      <bodyName>navsat_link</bodyName>
+      <bodyName>base_link</bodyName>
       <frameId>base_link</frameId>
       <topicName>/navsat/fix</topicName>
       <velocityTopicName>/navsat/vel</velocityTopicName>
