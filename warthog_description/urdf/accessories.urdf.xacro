@@ -10,4 +10,17 @@
     warthog_base/launch/base.launch
   -->
 
+  <!-- If enabled, generate a Novatel Smart6 payload. -->
+  <xacro:include filename="accessories/novatel_smart6.urdf.xacro" />
+  <xacro:if value="$(optenv WARTHOG_NAVSAT_SMART6 0)">
+    <novatel_smart6 prefix="$(optenv WARTHOG_NAVSAT_SMART6_MOUNT navsat)"/>
+
+    <joint name="$(optenv WARTHOG_NAVSAT_SMART6_MOUNT navsat)_joint" type="fixed">
+    <origin xyz="$(optenv WARTHOG_NAVSAT_SMART6_OFFSET 0 0 0)"
+            rpy="$(optenv WARTHOG_NAVSAT_SMART6_RPY 0 0 0)" />
+      <parent link="top_chassis_link" />
+      <child link="$(optenv WARTHOG_NAVSAT_SMART6_MOUNT navsat)_link" />
+    </joint>
+  </xacro:if>
+
 </robot>
