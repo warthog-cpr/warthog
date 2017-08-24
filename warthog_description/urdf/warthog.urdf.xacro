@@ -5,8 +5,10 @@
 
   <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
   <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
-  <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
+  <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+  <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
+  <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
 
   <xacro:macro name="wheel" params="prefix side fwd left">
     <link name="${prefix}_wheel">
@@ -16,14 +18,14 @@
         <xacro:wheel_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
       </inertial>
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
         <geometry>
           <mesh filename="package://warthog_description/meshes/wheel.stl" />
         </geometry>
         <material name="dark_grey" />
       </visual>
       <collision>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <origin xyz="0 0 0" rpy="${side*PI/2} 0 0"/>
         <geometry>
           <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
         </geometry>
@@ -75,16 +77,37 @@
                            y="${diff_unit_width}" z="${diff_unit_height}" />
       </inertial>
       <visual>
-        <origin xyz="0 ${side*-1*0.05} 0.197" rpy="${PI/2} 0 ${PI/2-side*PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
         <geometry>
           <mesh filename="package://warthog_description/meshes/rocker.stl" />
         </geometry>
-        <material name="yellow" />
+        <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+      </visual>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/fenders.stl" />
+        </geometry>
+        <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
+      </visual>
+      <visual>
+        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/light.stl" />
+        </geometry>
+        <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
+      </visual>
+      <visual>
+        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 ${side*PI}"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/light.stl" />
+        </geometry>
+        <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
       </visual>
       <collision>
-        <origin xyz="0 0 0.197" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
         <geometry>
-          <box size="${diff_unit_length} ${diff_unit_width} ${diff_unit_height}"/>
+          <mesh filename="package://warthog_description/meshes/fenders.stl" />
         </geometry>
       </collision>
     </link>
@@ -108,7 +131,7 @@
   <link name="base_link"></link>
 
   <joint name="base_link_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="0 0 0.025" rpy="0 0 0" />
     <parent link="base_link"/>
     <child link="chassis_link" />
   </joint>
@@ -125,12 +148,19 @@
       <geometry>
         <mesh filename="package://warthog_description/meshes/chassis.stl" />
       </geometry>
-      <material name="black" />
+      <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://warthog_description/meshes/e-stop.stl" />
+      </geometry>
+      <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+        <mesh filename="package://warthog_description/meshes/chassis-collision.stl" />
       </geometry>
     </collision>
   </link>
@@ -138,7 +168,7 @@
   <link name="top_chassis_link"></link>
 
   <joint name="top_link_joint" type="fixed">
-    <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0" />
+    <origin xyz="0 0 0.27218" rpy="0 0 0" />
     <parent link="chassis_link"/>
     <child link="top_chassis_link" />
   </joint>
@@ -146,21 +176,21 @@
   <!-- This link is purely to complete the visual look -->
   <link name="diff_link">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://warthog_description/meshes/diff-link.stl" />
       </geometry>
       <material name="light_grey" />
     </visual>
     <visual>
-      <origin xyz="0.285 0.3845 0.008" rpy="0 ${PI/2} 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://warthog_description/meshes/susp-link.stl" />
       </geometry>
       <material name="light_grey" />
     </visual>
     <visual>
-      <origin xyz="0.285 -0.3845 0.008" rpy="0 ${PI/2} 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://warthog_description/meshes/susp-link.stl" />
       </geometry>
@@ -170,7 +200,7 @@
   <joint name="diff_link_jnt" type="fixed">
     <parent link="chassis_link"/>
     <child link="diff_link"/>
-    <origin xyz="-0.65 0 0.07" rpy="0 0 0" />
+    <origin xyz="-0.5826 0 0.24979" rpy="0 0 0" />
   </joint>
 
   <!-- Bring in simulation data for Gazebo. -->
