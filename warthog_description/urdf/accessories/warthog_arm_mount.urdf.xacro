@@ -15,6 +15,11 @@
           <mesh filename="package://warthog_description/meshes/arm-mount-plate.stl" />
         </geometry>
       </collision>
+      <inertial>
+        <origin xyz="0 0 -0.01" rpy="0 0 0"/>
+        <mass value="1.45"/>
+        <xacro:box_inertia m="1.45" x="0.16838" y="0.16838" z="0.02" />
+      </inertial>
     </link>
   </xacro:macro>
 </robot>

@@ -5,7 +5,7 @@
 
   <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
   <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
-  <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
+  <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
   <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
   <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
@@ -88,7 +88,7 @@
         <geometry>
           <mesh filename="package://warthog_description/meshes/fenders.stl" />
         </geometry>
-        <material name="yellow"><color rgba="0.8 0.8 0.0 1.0" /></material>
+        <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
       </visual>
       <visual>
         <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 0"/>
@@ -131,7 +131,7 @@
   <link name="base_link"></link>
 
   <joint name="base_link_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="0 0 0.025" rpy="0 0 0" />
     <parent link="base_link"/>
     <child link="chassis_link" />
   </joint>
@@ -168,7 +168,7 @@
   <link name="top_chassis_link"></link>
 
   <joint name="top_link_joint" type="fixed">
-    <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0" />
+    <origin xyz="0 0 0.27218" rpy="0 0 0" />
     <parent link="chassis_link"/>
     <child link="top_chassis_link" />
   </joint>
@@ -198,11 +198,17 @@
     </visual>
   </link>
   <joint name="diff_link_jnt" type="fixed">
-    <parent link="base_link"/>
+    <parent link="chassis_link"/>
     <child link="diff_link"/>
-    <origin xyz="-0.58245 0 0.27475" rpy="0 0 0" />
+    <origin xyz="-0.5826 0 0.24979" rpy="0 0 0" />
   </joint>
 
+  <link name="imu_link" />
+  <joint name="imu_link_joint" type="fixed">
+    <origin xyz="$(optenv WARTHOG_IMU_XYZ 0 0 0)" rpy="$(optenv WARTHOG_IMU_RPY 0 0 0)" />
+    <parent link="chassis_link"/>
+    <child link="imu_link" />
+  </joint>
   <!-- Bring in simulation data for Gazebo. -->
   <xacro:include filename="$(find warthog_description)/urdf/warthog.gazebo" />
 
