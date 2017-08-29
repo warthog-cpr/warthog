@@ -1,12 +1,8 @@
-# Represents a command for the 8 RGB body lights on Warthog.
+# Represents a command for the 4 RGB body lights on Warthog.
 
-uint8 LIGHTS_FRONT_LEFT_LOW=0
-uint8 LIGHTS_FRONT_LEFT_INNER=1
-uint8 LIGHTS_FRONT_RIGHT_OUTTER=2
-uint8 LIGHTS_FRONT_RIGHT_INNER=3
-uint8 LIGHTS_REAR_LEFT_OUTTER=4
-uint8 LIGHTS_REAR_LEFT_INNER=5
-uint8 LIGHTS_REAR_RIGHT_OUTTER=6
-uint8 LIGHTS_REAR_RIGHT_INNER=7
+uint8 LIGHTS_FRONT_LEFT=0
+uint8 LIGHTS_FRONT_RIGHT=1
+uint8 LIGHTS_REAR_LEFT=2
+uint8 LIGHTS_REAR_RIGHT=3
 
-warthog_msgs/RGB[8] lights
+warthog_msgs/RGB[4] lights
