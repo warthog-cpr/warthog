@@ -50,4 +50,6 @@
 
   <gazebo reference="chassis_link"><material>Gazebo/Black</material></gazebo>
   <gazebo reference="diff_link"><material>Gazebo/Grey</material></gazebo>
+  <gazebo reference="bulkhead_link"><material>Gazebo/Black</material></gazebo>
+  <gazebo reference="arm_mount_link"><material>Gazebo/Grey</material></gazebo>
 </robot>
