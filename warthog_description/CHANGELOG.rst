@@ -2,8 +2,8 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-11-09)
+------------------
 * Added imu link.  Updated inertias for new links
 * Changed the URDF_EXTRAS variable so it is more flexible for external packages
 * Completely redid most meshes and added the bulkhead and arm mounting point. Added configs for both as well. Took meshes from 4 Mb down to 1 (total)

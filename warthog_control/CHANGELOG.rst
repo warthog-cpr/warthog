@@ -2,8 +2,8 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.2 (2017-11-09)
+------------------
 * [warthog_control] Set locks to nothing to appease twist_mux.
 * Added Novatel Smart6 GPS accessory and updated localization to use IMU.
 * Contributors: Michael Hosmar, Tony Baltovski
