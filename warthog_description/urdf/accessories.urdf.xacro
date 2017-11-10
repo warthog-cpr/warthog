@@ -38,14 +38,14 @@
       <child link="bulkhead_front_mount_link" />
     </joint>
 
-        <xacro:include filename="accessories/warthog_arm_mount.urdf.xacro" />
-        <xacro:if value="$(optenv WARTHOG_ARM_MOUNT 0)">
-          <warthog_arm_mount/>
-          <joint name="arm_mount_link_joint" type="fixed">
-            <origin xyz="0 0 0.02" rpy="0 0 0" />
-            <parent link="bulkhead_front_mount_link"/>
-            <child link="arm_mount_link" />
-          </joint>
-        </xacro:if>
+    <xacro:include filename="accessories/warthog_arm_mount.urdf.xacro" />
+    <xacro:if value="$(optenv WARTHOG_ARM_MOUNT 0)">
+    <warthog_arm_mount/>
+    <joint name="arm_mount_link_joint" type="fixed">
+      <origin xyz="0 0 0.02" rpy="0 0 0" />
+      <parent link="bulkhead_front_mount_link"/>
+      <child link="arm_mount_link" />
+    </joint>
+    </xacro:if>
   </xacro:if>
 </robot>
