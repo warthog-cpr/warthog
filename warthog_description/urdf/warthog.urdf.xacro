@@ -1,7 +1,45 @@
 <?xml version='1.0'?>
 
 <robot name="warthog" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:include filename="$(find warthog_description)/urdf/warthog_params.xacro" />
+
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+  <xacro:property name="wheel_radius" value="0.3" />
+  <xacro:property name="wheel_width" value="0.25" />
+  <xacro:property name="wheel_mass" value="15" />
+  <xacro:property name="wheel_to_track_ratio" value="0.5962" />
+
+  <xacro:property name="axle_x_offset" value="0.457367" />
+  <xacro:property name="axle_y_offset" value="0.0" />
+  <xacro:property name="axle_z_offset" value="-0.012977" />
+
+  <xacro:property name="diff_unit_length" value="1.34" />
+  <xacro:property name="diff_unit_width" value="0.28" />
+  <xacro:property name="diff_unit_height" value="0.63"/>
+  <xacro:property name="diff_unit_mass" value="50" />
+
+  <xacro:property name="diff_unit_offset_x" value="0.00" />
+  <xacro:property name="diff_unit_offset_y" value="0.56821" />
+  <xacro:property name="diff_unit_offset_z" value="0.0" />
+
+  <xacro:property name="chassis_length" value="1.35" />
+  <xacro:property name="chassis_width" value="0.70" />
+  <xacro:property name="chassis_height" value="0.30" />
+  <xacro:property name="chassis_mass" value="100" />
+
+  <xacro:property name="dummy_inertia" value="1e-09"/>
+
+  <xacro:macro name="wheel_inertia" params="m r h">
+    <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0"
+             iyy="${m*r*r/2}" iyz="0"
+             izz="${m*(3*r*r+h*h)/12}" />
+  </xacro:macro>
+
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertia ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0"
+             iyy="${m*(x*x+z*z)/12}" iyz="0"
+             izz="${m*(x*x+z*z)/12}" />
+  </xacro:macro>
 
   <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
   <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
@@ -10,39 +48,34 @@
   <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
   <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
 
-  <xacro:macro name="wheel" params="prefix side fwd left">
-    <link name="${prefix}_wheel">
+  <xacro:macro name="wheel" params="prefix side *joint_pose">
+    <link name="${prefix}_${side}_wheel_link">
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <mass value="${wheel_mass}" />
         <xacro:wheel_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_width}" />
       </inertial>
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
         <geometry>
           <mesh filename="package://warthog_description/meshes/wheel.stl" />
         </geometry>
         <material name="dark_grey" />
       </visual>
       <collision>
-        <origin xyz="0 0 0" rpy="${side*PI/2} 0 0"/>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
         <geometry>
           <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
         </geometry>
       </collision>
     </link>
-    <joint name="${prefix}_wheel_jnt" type="continuous">
-      <xacro:if value="${left}">
-        <parent link="left_diff_unit_link"/>
-      </xacro:if>
-      <xacro:unless value="${left}">
-        <parent link="right_diff_unit_link"/>
-      </xacro:unless>
-      <child link="${prefix}_wheel"/>
-      <origin xyz="${axle_x_offset*fwd} ${axle_y_offset*side} ${axle_z_offset}" rpy="0 0 0" />
+    <joint name="${prefix}_${side}_wheel_joint" type="continuous">
+      <parent link="${side}_diff_unit_link"/>
+      <child link="${prefix}_${side}_wheel_link"/>
+      <xacro:insert_block name="joint_pose" />
       <axis xyz="0 1 0"/>
     </joint>
-    <gazebo reference="${prefix}_wheel">
+    <gazebo reference="${prefix}_${side}_wheel_link">
       <selfCollide>false</selfCollide>
       <mu1>0.9</mu1>
       <mu2>0.5</mu2>
@@ -51,22 +84,97 @@
       <fdir1 value="1 0 0" />
       <material>Gazebo/Grey</material>
     </gazebo>
-    <transmission name="${prefix}_wheel_trans">
+    <transmission name="${prefix}_${side}_wheel_trans">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_wheel_jnt">
+      <joint name="${prefix}_${side}_wheel_joint">
         <hardwareInterface>VelocityJointInterface</hardwareInterface>
       </joint>
-      <actuator name="${prefix}_actuator">
+      <actuator name="${prefix}_${side}_actuator">
         <hardwareInterface>VelocityJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
   </xacro:macro>
 
-  <xacro:wheel prefix="fl" side="1" fwd="1" left="true"/>
-  <xacro:wheel prefix="fr" side="-1" fwd="1" left="false"/>
-  <xacro:wheel prefix="bl" side="1" fwd="-1" left="true"/>
-  <xacro:wheel prefix="br" side="-1" fwd="-1" left="false"/>
+  <xacro:macro name="track" params="prefix side *joint_pose">
+    <link name="${prefix}_${side}_track_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/tracks.dae" />
+        </geometry>
+        <material name="dark_grey" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/tracks_collision.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_${side}_track_joint" type="fixed">
+      <parent link="${side}_diff_unit_link"/>
+      <child link="${prefix}_${side}_track_link"/>
+      <xacro:insert_block name="joint_pose" />
+      <axis xyz="0 1 0"/>
+    </joint>
+
+    <!-- This adds wheels that rotate instead of tracks. -->
+    <link name="${prefix}_${side}_wheel_link">
+      <collision>
+        <origin xyz="0 0 0" rpy="${PI/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius*wheel_to_track_ratio}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_${side}_wheel_joint" type="continuous">
+      <parent link="${side}_diff_unit_link"/>
+      <child link="${prefix}_${side}_wheel_link"/>
+      <xacro:insert_block name="joint_pose" />
+      <axis xyz="0 1 0"/>
+    </joint>
+    <transmission name="${prefix}_${side}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}_${side}_wheel_joint">
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}_${side}_actuator">
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:unless value="$(optenv WARTHOG_TRACKS 0)">
+    <xacro:wheel prefix="front" side="left">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+    <xacro:wheel prefix="front" side="right">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+    <xacro:wheel prefix="rear" side="left">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+    <xacro:wheel prefix="rear" side="right">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:wheel>
+  </xacro:unless>
+
+  <xacro:if value="$(optenv WARTHOG_TRACKS 0)">
+    <xacro:track prefix="front" side="left">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:track>
+    <xacro:track prefix="front" side="right">
+      <origin xyz="${axle_x_offset*1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 0" />
+    </xacro:track>
+    <xacro:track prefix="rear" side="left">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*1} ${axle_z_offset}" rpy="0 0 ${PI}" />
+    </xacro:track>
+    <xacro:track prefix="rear" side="right">
+      <origin xyz="${axle_x_offset*-1} ${axle_y_offset*-1} ${axle_z_offset}" rpy="0 0 ${PI}" />
+    </xacro:track>
+  </xacro:if>
 
   <xacro:macro name="diff_unit" params="prefix side left">
     <link name="${prefix}_diff_unit_link">
@@ -111,7 +219,7 @@
         </geometry>
       </collision>
     </link>
-    <joint name="${prefix}_diff_unit_jnt" type="revolute">
+    <joint name="${prefix}_diff_unit_joint" type="revolute">
       <limit upper="0.15" lower="-0.15" effort="100000" velocity="1"/>
       <parent link="chassis_link"/>
       <child link="${prefix}_diff_unit_link"/>
@@ -197,7 +305,7 @@
       <material name="light_grey" />
     </visual>
   </link>
-  <joint name="diff_link_jnt" type="fixed">
+  <joint name="diff_link_joint" type="fixed">
     <parent link="chassis_link"/>
     <child link="diff_link"/>
     <origin xyz="-0.5826 0 0.24979" rpy="0 0 0" />
