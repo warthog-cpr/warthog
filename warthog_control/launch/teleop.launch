@@ -22,5 +22,7 @@
    <rosparam param="locks">[]</rosparam>
    <remap from="cmd_vel_out" to="warthog_velocity_controller/cmd_vel"/>
   </node>
-
+  <group if="$(optenv WARTHOG_TWIST_MUX_EXTRAS 0)" >
+    <rosparam command="load" file="$(env WARTHOG_TWIST_MUX_EXTRAS_PATH)" />
+  </group>
 </launch>
