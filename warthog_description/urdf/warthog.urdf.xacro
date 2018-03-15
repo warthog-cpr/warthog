@@ -220,7 +220,7 @@
       </collision>
     </link>
     <joint name="${prefix}_diff_unit_joint" type="revolute">
-      <limit upper="0.15" lower="-0.15" effort="100000" velocity="1"/>
+      <limit upper="0.4" lower="-0.4" effort="100" velocity="1"/>
       <parent link="chassis_link"/>
       <child link="${prefix}_diff_unit_link"/>
       <origin xyz="${diff_unit_offset_x} ${diff_unit_offset_y*side} ${diff_unit_offset_z}" rpy="0 0 0" />
