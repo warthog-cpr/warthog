@@ -2,8 +2,8 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2018-04-12)
+------------------
 * Added track configuration.
 * Added track meshes
 * Contributors: Dave Niewinski, Tony Baltovski

@@ -2,8 +2,8 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.0.3 (2018-04-12)
+------------------
 * [warthog_control] Fixed incorrect joint name.
 * Added optional config load for teleop.launch
 * Added track configuration.
