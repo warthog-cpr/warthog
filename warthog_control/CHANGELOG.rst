@@ -2,6 +2,11 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Minor syntax changes for build warnings.  Changed hardware interfaces.  Added inorder processing for xacro
+* Contributors: Dave Niewinski
+
 0.0.3 (2018-04-12)
 ------------------
 * [warthog_control] Fixed incorrect joint name.

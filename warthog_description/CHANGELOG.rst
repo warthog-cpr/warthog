@@ -2,6 +2,13 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Lowered the effort and increase the limits to make the diff units more accurate
+* Updated link stl
+* Minor syntax changes for build warnings.  Changed hardware interfaces.  Added inorder processing for xacro
+* Contributors: Dave Niewinski
+
 0.0.3 (2018-04-12)
 ------------------
 * Added track configuration.
