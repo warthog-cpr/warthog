@@ -2,6 +2,9 @@
 Changelog for package warthog_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.0.2 (2017-11-09)
 ------------------
 * [warthog_msgs] Updated messages for changes to platform.
