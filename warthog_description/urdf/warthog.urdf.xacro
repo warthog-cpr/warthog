@@ -77,11 +77,11 @@
     </joint>
     <gazebo reference="${prefix}_${side}_wheel_link">
       <selfCollide>false</selfCollide>
-      <!-- mu1>0.9</mu1 -->
-      <!-- mu2>0.5</mu2 -->
-      <!-- kp value="10000000.0" / -->
-      <!-- kd value="10.0" / -->
-      <!-- fdir1 value="1 0 0" / -->
+      <mu1>0.5</mu1>
+      <mu2>0.5</mu2>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <fdir1 value="1 0 0" />
       <material>Gazebo/Grey</material>
     </gazebo>
     <transmission name="${prefix}_${side}_wheel_trans">
