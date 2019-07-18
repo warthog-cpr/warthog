@@ -2,6 +2,9 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.0 (2018-04-12)
 ------------------
 * Minor syntax changes for build warnings.  Changed hardware interfaces.  Added inorder processing for xacro
