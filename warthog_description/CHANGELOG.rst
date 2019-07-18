@@ -2,8 +2,8 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.1 (2019-07-18)
+------------------
 * Tuned wheel friction to reduce drift when stopped
 * Removed gazebo wheel physics as it was causing strangeness when turning, and defaults seem to work
 * Contributors: Dave Niewinski, L. James Azzalini, Tony Baltovski
