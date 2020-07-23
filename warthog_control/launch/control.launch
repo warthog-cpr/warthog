@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="enable_ekf" default="$(optenv ENABLE_EKF false)"/>
+  <arg name="enable_ekf" default="$(optenv ENABLE_EKF true)"/>
 
   <rosparam command="load" file="$(find warthog_control)/config/control.yaml" />
 
