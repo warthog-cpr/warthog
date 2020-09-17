@@ -2,8 +2,8 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.2 (2020-09-17)
+------------------
 * Remove unused arg and set joysticks to use joy topic. (`#11 <https://github.com/warthog-cpr/warthog/issues/11>`_)
 * Disable ekf option (`#9 <https://github.com/warthog-cpr/warthog/issues/9>`_)
   * added env var and if-statement to disable robot ekf

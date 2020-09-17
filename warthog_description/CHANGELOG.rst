@@ -2,8 +2,8 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.2 (2020-09-17)
+------------------
 * Add the legacy namespace mode attribute to the ros control plugin. This suppresses a warning in gazebo
 * Contributors: Chris I-B
 
