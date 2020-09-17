@@ -2,6 +2,11 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add the legacy namespace mode attribute to the ros control plugin. This suppresses a warning in gazebo
+* Contributors: Chris I-B
+
 0.1.1 (2019-07-18)
 ------------------
 * Tuned wheel friction to reduce drift when stopped

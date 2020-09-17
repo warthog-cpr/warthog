@@ -2,6 +2,17 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Remove unused arg and set joysticks to use joy topic. (`#11 <https://github.com/warthog-cpr/warthog/issues/11>`_)
+* Disable ekf option (`#9 <https://github.com/warthog-cpr/warthog/issues/9>`_)
+  * added env var and if-statement to disable robot ekf
+  * changed if to unless
+  * clearer wording
+  * chenged default to true
+* [warthog_control] Removed rosserial_server as run dependency.
+* Contributors: Michael Hosmar, Tony Baltovski, jmastrangelo-cpr
+
 0.1.1 (2019-07-18)
 ------------------
 
