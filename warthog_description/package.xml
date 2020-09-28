@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>warthog_description</name>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <description>URDF robot description for Warthog</description>
 
   <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
