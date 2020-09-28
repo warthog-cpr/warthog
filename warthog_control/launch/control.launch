@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="config_extras"
-       default="$(eval optenv('WARTHOG_CONFIG_EXTRAS', find('husky_control') + '/config/empty.yaml'))"/>
+       default="$(eval optenv('WARTHOG_CONFIG_EXTRAS', find('warthog_control') + '/config/empty.yaml'))"/>
   <arg name="enable_ekf" default="$(optenv ENABLE_EKF true)"/>
 
   <rosparam command="load" file="$(find warthog_control)/config/control.yaml" />
