@@ -5,8 +5,8 @@ joy_teleop:
     scale_linear_turbo: 1.0
     axis_angular: 0
     scale_angular: 2.4
-    enable_button: 0
-    enable_turbo_button: 2
+    enable_button: 4
+    enable_turbo_button: 5
   joy_node:
     deadzone: 0.1
     autorepeat_rate: 20
