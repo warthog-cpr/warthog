@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="joy_dev" default="$(optenv WARTHOG_JOY_DEV /dev/input/js0)" />
 
   <group ns="joy_teleop" if="$(optenv WARTHOG_JOY_TELEOP 0)">
     <rosparam command="load" file="$(find warthog_control)/config/teleop.yaml" />
