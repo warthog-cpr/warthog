@@ -2,6 +2,15 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Bumped CMake version to avoid author warning.
+* Change the enable & enable-turbo buttons to 4 and 5 to match with all the other platforms
+* Add another optenv to allow setting the Warthog's joy device
+* Config extras (`#12 <https://github.com/warthog-cpr/warthog/issues/12>`_)
+  * Add a WARTHOG_CONFIG_EXTRAS environment variable for the same purpose as the equivalent in Husky.
+* Contributors: Chris I-B, Chris Iverach-Brereton, Tony Baltovski
+
 0.1.2 (2020-09-17)
 ------------------
 * Remove unused arg and set joysticks to use joy topic. (`#11 <https://github.com/warthog-cpr/warthog/issues/11>`_)

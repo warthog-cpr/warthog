@@ -2,6 +2,11 @@
 Changelog for package warthog_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Bumped CMake version to avoid author warning.
+* Contributors: Tony Baltovski
+
 0.1.2 (2020-09-17)
 ------------------
 
