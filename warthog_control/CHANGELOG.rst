@@ -2,8 +2,8 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.3 (2021-03-09)
+------------------
 * Bumped CMake version to avoid author warning.
 * Change the enable & enable-turbo buttons to 4 and 5 to match with all the other platforms
 * Add another optenv to allow setting the Warthog's joy device
