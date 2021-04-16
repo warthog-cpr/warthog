@@ -23,6 +23,16 @@
     </joint>
   </xacro:if>
 
+  <xacro:include filename="accessories/warthog_generator.urdf.xacro" />
+  <xacro:if value="$(optenv WARTHOG_GENERATOR 0)">
+    <xacro:warthog_generator/>
+    <joint name="generator_link_joint" type="fixed">
+      <origin xyz="-0.42506 0 0.0017" rpy="0 0 0" />
+      <parent link="top_chassis_link"/>
+      <child link="generator_link" />
+    </joint>
+  </xacro:if>
+
   <xacro:include filename="accessories/warthog_bulkhead.urdf.xacro" />
   <xacro:if value="$(optenv WARTHOG_BULKHEAD 0)">
     <warthog_bulkhead/>
