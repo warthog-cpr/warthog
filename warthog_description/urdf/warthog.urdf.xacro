@@ -29,6 +29,8 @@
 
   <xacro:property name="dummy_inertia" value="1e-09"/>
 
+  <xacro:property name="warthog_color" value="$(optenv WARTHOG_COLOR yellow)" />
+
   <xacro:macro name="wheel_inertia" params="m r h">
     <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0"
              iyy="${m*r*r/2}" iyz="0"
@@ -44,6 +46,7 @@
   <material name="dark_grey"><color rgba="0.2 0.2 0.2 1.0" /></material>
   <material name="light_grey"><color rgba="0.4 0.4 0.4 1.0" /></material>
   <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
+  <material name="olive_green"><color rgba="0.333 0.419 0.184 1.0" /></material>
   <material name="black"><color rgba="0.15 0.15 0.15 1.0" /></material>
   <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
   <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
@@ -196,7 +199,12 @@
         <geometry>
           <mesh filename="package://warthog_description/meshes/fenders.stl" />
         </geometry>
-        <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
+        <xacro:if value="${warthog_color == 'yellow'}">
+          <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
+        </xacro:if>
+        <xacro:if value="${warthog_color == 'olive_green'}">
+          <material name="olive_green"><color rgba="0.333 0.419 0.184 1.0" /></material>
+        </xacro:if>
       </visual>
       <visual>
         <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 0"/>
