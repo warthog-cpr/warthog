@@ -29,6 +29,28 @@
 
   <xacro:property name="dummy_inertia" value="1e-09"/>
 
+  <!--
+    Optional paint colors.
+    Available colors:
+      - yellow (default)
+      - orange
+      - olive
+      - sand
+  -->
+  <xacro:property name="warthog_color" value="$(optenv WARTHOG_COLOR yellow)" />
+  <xacro:if value="${warthog_color == 'yellow'}">
+    <xacro:property name="warthog_color_rgba" value="0.95 0.816 0.082 1.0" />
+  </xacro:if>
+  <xacro:if value="${warthog_color == 'orange'}">
+    <xacro:property name="warthog_color_rgba" value="1.0 0.48 0.0 1.0" />
+  </xacro:if>
+  <xacro:if value="${warthog_color == 'olive'}">
+    <xacro:property name="warthog_color_rgba" value="0.333 0.419 0.184 1.0" />
+  </xacro:if>
+  <xacro:if value="${warthog_color == 'sand'}">
+    <xacro:property name="warthog_color_rgba" value="0.86 0.75 0.54 1.0" />
+  </xacro:if>
+
   <xacro:macro name="wheel_inertia" params="m r h">
     <inertia ixx="${m*(3*r*r+h*h)/12}" ixy="0" ixz="0"
              iyy="${m*r*r/2}" iyz="0"
@@ -196,7 +218,9 @@
         <geometry>
           <mesh filename="package://warthog_description/meshes/fenders.stl" />
         </geometry>
-        <material name="yellow"><color rgba="0.95 0.816 0.082 1.0" /></material>
+        <material name="${warthog_color}">
+          <color rgba="${warthog_color_rgba}" />
+        </material>
       </visual>
       <visual>
         <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 0"/>
