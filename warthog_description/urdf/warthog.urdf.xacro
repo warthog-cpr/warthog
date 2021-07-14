@@ -353,6 +353,6 @@
   <xacro:include filename="$(optenv WARTHOG_URDF_EXTRAS empty.urdf)" />
 
   <!-- Optional for Clearpath internal softwares -->
-  <xacro:include filename="$(optenv CPR_URDF_EXTRAS empty.urdf)" />
+  <xacro:include filename="$(optenv CPR_URDF_EXTRAS cpr_extras.urdf)" />
 
 </robot>
