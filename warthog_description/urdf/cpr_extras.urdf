@@ -1,8 +1,0 @@
-<robot>
-  <!-- This file is reserved for Clearpath internal autonomy software urdfs
-       and is included by default from warthog.urdf.xacro. Do not change this
-       file.
-       If a robot is being customized and requires additional URDF, Use
-       WARTHOG_URDF_EXTRAS environment variable to the full path of the file you
-       would like to be included. -->
-</robot>
