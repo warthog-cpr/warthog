@@ -2,6 +2,19 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* CPR extras (`#17 <https://github.com/warthog-cpr/warthog/issues/17>`_)
+  * cpr_extras
+  * cpr_extras
+  * remove cpr_extras.urdf
+  Co-authored-by: Ebrahim Shahrivar <eshahrivar@clearpath.ai>
+* Add an envar to set the paint colour of the URDF (`#16 <https://github.com/warthog-cpr/warthog/issues/16>`_)
+  * Add the WARTHOG_COLOR envar, with options 'yellow' (default) and 'olive_green'
+  * Simplify the paint options, add orange and sand as additional choices based on feedback from sales on the available colours.
+* [warthog_description] Added generator accessory.
+* Contributors: Chris I-B, Ebrahim Shahrivar, Tony Baltovski
+
 0.1.3 (2021-03-09)
 ------------------
 * Bumped CMake version to avoid author warning.

@@ -2,6 +2,9 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.3 (2021-03-09)
 ------------------
 * Bumped CMake version to avoid author warning.
