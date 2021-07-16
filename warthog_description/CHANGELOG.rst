@@ -2,8 +2,8 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.4 (2021-07-16)
+------------------
 * CPR extras (`#17 <https://github.com/warthog-cpr/warthog/issues/17>`_)
   * cpr_extras
   * cpr_extras
