@@ -290,14 +290,20 @@
       <gazebo reference="${prefix}_diff_unit_link">
         <selfCollide>false</selfCollide>
         <!-- TODO we should define a custom gazebo material, but it's not working yet -->
-        <material>Gazebo/Yellow</material>
+        <material>
+          <uri>model://materials/olive.material</uri>
+          <script>Warthog/Olive</script>
+        </material>
       </gazebo>
     </xacro:if>
     <xacro:if value="${warthog_color == 'sand'}">
       <gazebo reference="${prefix}_diff_unit_link">
         <selfCollide>false</selfCollide>
         <!-- TODO we should define a custom gazebo material, but it's not working yet -->
-        <material>Gazebo/Yellow</material>
+        <material>
+          <uri>model://materials/sand.material</uri>
+          <script>Warthog/Sand</script>
+        </material>
       </gazebo>
     </xacro:if>
   </xacro:macro>

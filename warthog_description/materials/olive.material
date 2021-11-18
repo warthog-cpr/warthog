@@ -1,0 +1,14 @@
+import * from "grid.material"
+
+material Warthog/Olive
+{
+  technique
+  {
+    pass ambient
+    {
+      ambient 0.333 0.419 0.184
+      diffuse 0.333 0.419 0.184
+      specular 0.1 0.1 0.1 1 1
+    }
+  }
+}

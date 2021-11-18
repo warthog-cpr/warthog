@@ -1,0 +1,14 @@
+import * from "grid.material"
+
+material Warthog/Sand
+{
+  technique
+  {
+    pass ambient
+    {
+      ambient 0.86 0.75 0.54
+      diffuse 0.86 0.75 0.54
+      specular 0.1 0.1 0.1 1 1
+    }
+  }
+}
