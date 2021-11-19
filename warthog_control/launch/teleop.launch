@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 
+  <arg name="enable_joy" default="$(optenv WARTHOG_JOY_TELEOP 0)" />
   <arg name="joy_dev" default="$(optenv WARTHOG_JOY_DEV /dev/input/js0)" />
 
-  <group ns="joy_teleop" if="$(optenv WARTHOG_JOY_TELEOP 0)">
+  <group ns="joy_teleop" if="$(arg enable_joy)">
     <rosparam command="load" file="$(find warthog_control)/config/teleop.yaml" />
     <node pkg="joy" type="joy_node" name="joy_node">
       <param name="dev" value="$(arg joy_dev)" />
