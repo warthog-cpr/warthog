@@ -104,7 +104,7 @@
       <kp value="10000000.0" />
       <kd value="1.0" />
       <fdir1 value="1 0 0" />
-      <material>Gazebo/Grey</material>
+      <material>Gazebo/DarkGrey</material>
     </gazebo>
     <transmission name="${prefix}_${side}_wheel_trans">
       <type>transmission_interface/SimpleTransmission</type>
@@ -253,7 +253,14 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
     <gazebo reference="${prefix}_diff_unit_headlight_link">
-      <material>Gazebo/White</material>
+      <visual>
+        <material>
+          <ambient>0.9 0.9 0.9 1</ambient>
+          <diffuse>0.9 0.9 0.9 1</diffuse>
+          <specular>0.9 0.9 0.9 1</specular>
+          <emissive>0.9 0.9 0.9 1</emissive>
+        </material>
+      </visual>
     </gazebo>
 
     <link name="${prefix}_diff_unit_taillight_link">
@@ -271,41 +278,27 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
     <gazebo reference="${prefix}_diff_unit_taillight_link">
-      <material>Gazebo/Red</material>
+      <visual>
+        <material>
+          <ambient>0.9 0 0 1</ambient>
+          <diffuse>0.9 0 0 1</diffuse>
+          <specular>0.9 0 0 1</specular>
+          <emissive>0.9 0 0 1</emissive>
+        </material>
+      </visual>
     </gazebo>
 
-    <xacro:if value="${warthog_color == 'yellow'}">
-      <gazebo reference="${prefix}_diff_unit_link">
-        <selfCollide>false</selfCollide>
-        <material>Gazebo/Yellow</material>
-      </gazebo>
-    </xacro:if>
-    <xacro:if value="${warthog_color == 'orange'}">
-      <gazebo reference="${prefix}_diff_unit_link">
-        <selfCollide>false</selfCollide>
-        <material>Gazebo/Orange</material>
-      </gazebo>
-    </xacro:if>
-    <xacro:if value="${warthog_color == 'olive'}">
-      <gazebo reference="${prefix}_diff_unit_link">
-        <selfCollide>false</selfCollide>
-        <!-- TODO we should define a custom gazebo material, but it's not working yet -->
+    <gazebo reference="${prefix}_diff_unit_link">
+      <selfCollide>false</selfCollide>
+      <visual>
         <material>
-          <uri>model://materials/olive.material</uri>
-          <script>Warthog/Olive</script>
+          <ambient>${warthog_color_rgba}</ambient>
+          <diffuse>${warthog_color_rgba}</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
         </material>
-      </gazebo>
-    </xacro:if>
-    <xacro:if value="${warthog_color == 'sand'}">
-      <gazebo reference="${prefix}_diff_unit_link">
-        <selfCollide>false</selfCollide>
-        <!-- TODO we should define a custom gazebo material, but it's not working yet -->
-        <material>
-          <uri>model://materials/sand.material</uri>
-          <script>Warthog/Sand</script>
-        </material>
-      </gazebo>
-    </xacro:if>
+      </visual>
+    </gazebo>
   </xacro:macro>
 
   <xacro:diff_unit prefix="left" side="1" left="true"/>

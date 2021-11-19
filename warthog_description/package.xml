@@ -17,6 +17,5 @@
   <run_depend>xacro</run_depend>
 
   <export>
-    <gazebo_ros gazebo_media_path="${prefix}"/>
   </export>
 </package>
