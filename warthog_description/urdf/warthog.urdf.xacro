@@ -104,7 +104,7 @@
       <kp value="10000000.0" />
       <kd value="1.0" />
       <fdir1 value="1 0 0" />
-      <material>Gazebo/Grey</material>
+      <material>Gazebo/DarkGrey</material>
     </gazebo>
     <transmission name="${prefix}_${side}_wheel_trans">
       <type>transmission_interface/SimpleTransmission</type>
@@ -222,20 +222,6 @@
           <color rgba="${warthog_color_rgba}" />
         </material>
       </visual>
-      <visual>
-        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 0"/>
-        <geometry>
-          <mesh filename="package://warthog_description/meshes/light.stl" />
-        </geometry>
-        <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
-      </visual>
-      <visual>
-        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 ${side*PI}"/>
-        <geometry>
-          <mesh filename="package://warthog_description/meshes/light.stl" />
-        </geometry>
-        <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
-      </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${side*PI/2}"/>
         <geometry>
@@ -251,9 +237,67 @@
       <axis xyz="0 1 0"/>
       <dynamics damping="100" friction="0.5"/>
     </joint>
+
+    <link name="${prefix}_diff_unit_headlight_link">
+      <visual>
+        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/light.stl" />
+        </geometry>
+        <material name="white"><color rgba="0.9 0.9 0.9 1.0" /></material>
+      </visual>
+    </link>
+    <joint name="${prefix}_diff_unit_headlight_joint" type="fixed">
+      <parent link="${prefix}_diff_unit_link" />
+      <child link="${prefix}_diff_unit_headlight_link" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    <gazebo reference="${prefix}_diff_unit_headlight_link">
+      <visual>
+        <material>
+          <ambient>0.9 0.9 0.9 1</ambient>
+          <diffuse>0.9 0.9 0.9 1</diffuse>
+          <specular>0.9 0.9 0.9 1</specular>
+          <emissive>0.9 0.9 0.9 1</emissive>
+        </material>
+      </visual>
+    </gazebo>
+
+    <link name="${prefix}_diff_unit_taillight_link">
+      <visual>
+        <origin xyz="0 ${side*-0.0244} 0" rpy="0 0 ${side*PI}"/>
+        <geometry>
+          <mesh filename="package://warthog_description/meshes/light.stl" />
+        </geometry>
+        <material name="red"><color rgba="0.9 0.0 0.0 1.0" /></material>
+      </visual>
+    </link>
+    <joint name="${prefix}_diff_unit_taillight_joint" type="fixed">
+      <parent link="${prefix}_diff_unit_link" />
+      <child link="${prefix}_diff_unit_taillight_link" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+    <gazebo reference="${prefix}_diff_unit_taillight_link">
+      <visual>
+        <material>
+          <ambient>0.9 0 0 1</ambient>
+          <diffuse>0.9 0 0 1</diffuse>
+          <specular>0.9 0 0 1</specular>
+          <emissive>0.9 0 0 1</emissive>
+        </material>
+      </visual>
+    </gazebo>
+
     <gazebo reference="${prefix}_diff_unit_link">
       <selfCollide>false</selfCollide>
-      <material>Gazebo/Yellow</material>
+      <visual>
+        <material>
+          <ambient>${warthog_color_rgba}</ambient>
+          <diffuse>${warthog_color_rgba}</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
     </gazebo>
   </xacro:macro>
 
