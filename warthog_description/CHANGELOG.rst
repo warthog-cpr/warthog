@@ -2,8 +2,8 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.5 (2022-01-18)
+------------------
 * Add support for WARTHOG_COLOR in gazebo (`#18 <https://github.com/warthog-cpr/warthog/issues/18>`_)
   * Move the headlights & taillights into their own links so we can apply the correct Gazebo materials to them (otherwise the robot looks symmetrical, which is confusing). Start applying different materials to the wheel diff links, depending on the paint colour. Sand & Olive are not yet supported
   * Start trying to implement custom colours for the sand & olive materials. No joy so far.
