@@ -2,6 +2,15 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add support for WARTHOG_COLOR in gazebo (`#18 <https://github.com/warthog-cpr/warthog/issues/18>`_)
+  * Move the headlights & taillights into their own links so we can apply the correct Gazebo materials to them (otherwise the robot looks symmetrical, which is confusing). Start applying different materials to the wheel diff links, depending on the paint colour. Sand & Olive are not yet supported
+  * Start trying to implement custom colours for the sand & olive materials. No joy so far.
+  * Remove the material scripts; they weren't working anyway. Add the visual tag around the gazebo material, explicitly define the ambient, diffuse, specular, and emissive properties. Add emissive attributes to the headlights & taillights so they actually show up in the dark
+  * Add an argument to enable game-controller input via an arg; this makes using the controller inside gazebo easier as we don't need to explicitly define an envar (though that option still exists)
+* Contributors: Chris I-B
+
 0.1.4 (2021-07-16)
 ------------------
 * CPR extras (`#17 <https://github.com/warthog-cpr/warthog/issues/17>`_)
