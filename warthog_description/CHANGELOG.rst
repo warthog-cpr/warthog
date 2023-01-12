@@ -2,8 +2,8 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.6 (2023-01-12)
+------------------
 * Change the GPS plugin reference heading to 90 so it's ENU
 * Add missing xacro tags for ROS Noetic (and backwards compatability)
 * Add GAZEBO_WORLD\_{LAT|LON} envars to change the reference coordinate of the robot's integral GPS
