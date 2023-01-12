@@ -2,6 +2,13 @@
 Changelog for package warthog_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Change the GPS plugin reference heading to 90 so it's ENU
+* Add missing xacro tags for ROS Noetic (and backwards compatability)
+* Add GAZEBO_WORLD\_{LAT|LON} envars to change the reference coordinate of the robot's integral GPS
+* Contributors: Chris Iverach-Brereton, Joey Yang
+
 0.1.5 (2022-01-18)
 ------------------
 * Add support for WARTHOG_COLOR in gazebo (`#18 <https://github.com/warthog-cpr/warthog/issues/18>`_)

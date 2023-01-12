@@ -2,6 +2,9 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.1.5 (2022-01-18)
 ------------------
 * Add support for WARTHOG_COLOR in gazebo (`#18 <https://github.com/warthog-cpr/warthog/issues/18>`_)
