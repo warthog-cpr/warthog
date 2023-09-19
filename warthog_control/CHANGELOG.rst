@@ -2,6 +2,11 @@
 Changelog for package warthog_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* [warthog_contorl] Updated diff_drive_controller parameters.
+* Contributors: Tony Baltovski
+
 0.1.7 (2023-06-05)
 ------------------
 
