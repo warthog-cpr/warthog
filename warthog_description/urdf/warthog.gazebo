@@ -2,7 +2,6 @@
 <robot>
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
       <legacyModeNS>true</legacyModeNS>
     </plugin>
   </gazebo>
@@ -16,7 +15,6 @@
 
   <gazebo>
     <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
-      <robotNamespace>/</robotNamespace>
       <updateRate>50.0</updateRate>
       <bodyName>imu_link</bodyName>
       <topicName>imu/data</topicName>
@@ -32,7 +30,6 @@
   <gazebo>
     <plugin name="gps_controller" filename="libhector_gazebo_ros_gps.so">
       <updateRate>20</updateRate>
-      <robotNamespace>/</robotNamespace>
       <bodyName>base_link</bodyName>
       <frameId>base_link</frameId>
       <topicName>/navsat/fix</topicName>
